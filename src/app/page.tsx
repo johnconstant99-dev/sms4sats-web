@@ -1,4 +1,4 @@
-use client";
+"use client";
 
 import { useState, useEffect, useCallback, useRef } from "react";
 // QR via image API
@@ -276,15 +276,9 @@ export default function Home() {
               · No accounts · No KYC
             </p>
             <div className="flex flex-wrap justify-center gap-4 mt-6 text-sm text-zinc-500">
-              <span className="flex items-center gap-1.5">
-                🛡 Hold invoices
-              </span>
-              <span className="flex items-center gap-1.5">
-                ₿ Lightning only
-              </span>
-              <span className="flex items-center gap-1.5">
-                💬 400+ services
-              </span>
+              <span className="flex items-center gap-1.5">🛡 Hold invoices</span>
+              <span className="flex items-center gap-1.5">₿ Lightning only</span>
+              <span className="flex items-center gap-1.5">💬 400+ services</span>
             </div>
           </div>
         )}
@@ -293,55 +287,37 @@ export default function Home() {
           <div className="bg-zinc-900/60 border border-zinc-800 rounded-2xl p-6 sm:p-8 space-y-6">
             <div className="grid sm:grid-cols-2 gap-5">
               <div>
-                <label className="flex items-center gap-2 text-sm font-medium text-zinc-300 mb-2">
-                  🌐 Country
-                </label>
+                <label className="flex items-center gap-2 text-sm font-medium text-zinc-300 mb-2">🌐 Country</label>
                 <select
                   value={countryId}
                   onChange={(e) => setCountryId(Number(e.target.value))}
                   className="w-full bg-zinc-950 border border-zinc-700 rounded-xl px-4 py-3 text-zinc-100 focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500 appearance-none"
                 >
                   {countries.map((c) => (
-                    <option key={c.id} value={c.id}>
-                      {c.eng || `Country ${c.id}`}
-                    </option>
+                    <option key={c.id} value={c.id}>{c.eng || `Country ${c.id}`}</option>
                   ))}
                 </select>
               </div>
               <div>
-                <label className="flex items-center gap-2 text-sm font-medium text-zinc-300 mb-2">
-                  📱 Service
-                </label>
+                <label className="flex items-center gap-2 text-sm font-medium text-zinc-300 mb-2">📱 Service</label>
                 <select
                   value={serviceCode}
                   onChange={(e) => setServiceCode(e.target.value)}
                   className="w-full bg-zinc-950 border border-zinc-700 rounded-xl px-4 py-3 text-zinc-100 focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500 appearance-none"
                 >
-                  {services.length === 0 && (
-                    <option value="ot">Any other</option>
-                  )}
+                  {services.length === 0 && <option value="ot">Any other</option>}
                   {services.map((s) => (
-                    <option key={s.code} value={s.code}>
-                      {s.name}
-                    </option>
+                    <option key={s.code} value={s.code}>{s.name}</option>
                   ))}
                 </select>
               </div>
             </div>
-
             <div className="flex items-center justify-between pt-2">
               <div className="text-sm text-zinc-400">
                 {loadingPrice ? (
-                  <span className="flex items-center gap-2">
-                    ⏳ Checking price…
-                  </span>
+                  <span className="flex items-center gap-2">⏳ Checking price…</span>
                 ) : price != null ? (
-                  <span>
-                    Price:{" "}
-                    <strong className="text-amber-400 text-lg">
-                      {price.toLocaleString()} sats
-                    </strong>
-                  </span>
+                  <span>Price: <strong className="text-amber-400 text-lg">{price.toLocaleString()} sats</strong></span>
                 ) : (
                   <span>~1500–4000 sats (varies)</span>
                 )}
@@ -379,7 +355,6 @@ export default function Home() {
                   : "Scan the QR or open in your Lightning wallet. Hold invoice — you only pay if code arrives."}
               </p>
             </div>
-
             {state.step === "pay" && (
               <div className="flex flex-col items-center gap-4">
                 <div className="bg-white p-4 rounded-2xl">
@@ -390,55 +365,27 @@ export default function Home() {
                     height={220}
                   />
                 </div>
-                <a
-                  href={lnurl(state.payreq)}
-                  className="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-400 text-zinc-950 font-medium px-5 py-2.5 rounded-xl transition"
-                >
+                <a href={lnurl(state.payreq)} className="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-400 text-zinc-950 font-medium px-5 py-2.5 rounded-xl transition">
                   ⚡ Open in wallet
                 </a>
-                <button
-                  onClick={() => copy(state.payreq, "invoice")}
-                  className="text-sm text-zinc-400 hover:text-zinc-200 flex items-center gap-1.5"
-                >
+                <button onClick={() => copy(state.payreq, "invoice")} className="text-sm text-zinc-400 hover:text-zinc-200 flex items-center gap-1.5">
                   {copied === "invoice" ? <>✓ Copied</> : <>📋 Copy invoice</>}
                 </button>
               </div>
             )}
-
             {state.step === "waiting" && state.number && (
               <div className="bg-zinc-950 border border-zinc-700 rounded-xl p-5 text-center">
-                <p className="text-xs text-zinc-500 uppercase tracking-wider mb-1">
-                  Phone number
-                </p>
-                <p className="text-2xl font-mono font-semibold tracking-wide text-amber-400">
-                  +{state.number}
-                </p>
-                <button
-                  onClick={() => copy(String(state.number), "number")}
-                  className="mt-2 text-sm text-zinc-400 hover:text-zinc-200 inline-flex items-center gap-1"
-                >
+                <p className="text-xs text-zinc-500 uppercase tracking-wider mb-1">Phone number</p>
+                <p className="text-2xl font-mono font-semibold tracking-wide text-amber-400">+{state.number}</p>
+                <button onClick={() => copy(String(state.number), "number")} className="mt-2 text-sm text-zinc-400 hover:text-zinc-200 inline-flex items-center gap-1">
                   {copied === "number" ? <>✓ Copied</> : <>📋 Copy</>}
                 </button>
               </div>
             )}
-
-            <div className="flex items-center justify-center gap-2 text-sm text-zinc-500">
-              ⏳ Polling for code…
-            </div>
-
+            <div className="flex items-center justify-center gap-2 text-sm text-zinc-500">⏳ Polling for code…</div>
             <div className="flex justify-center gap-3 pt-2">
-              <button
-                onClick={cancelOrder}
-                className="text-sm text-zinc-500 hover:text-red-400 flex items-center gap-1.5 transition"
-              >
-                ✕ Cancel order
-              </button>
-              <button
-                onClick={reset}
-                className="text-sm text-zinc-500 hover:text-zinc-300 flex items-center gap-1.5 transition"
-              >
-                ↻ Start over
-              </button>
+              <button onClick={cancelOrder} className="text-sm text-zinc-500 hover:text-red-400 flex items-center gap-1.5 transition">✕ Cancel order</button>
+              <button onClick={reset} className="text-sm text-zinc-500 hover:text-zinc-300 flex items-center gap-1.5 transition">↻ Start over</button>
             </div>
           </div>
         )}
@@ -446,64 +393,31 @@ export default function Home() {
         {state.step === "success" && (
           <div className="bg-zinc-900/60 border border-emerald-800/50 rounded-2xl p-6 sm:p-8 space-y-6">
             <div className="text-center">
-              <div className="w-14 h-14 rounded-full bg-emerald-500/20 flex items-center justify-center mx-auto mb-3">
-                ✓
-              </div>
-              <h3 className="text-xl font-semibold text-emerald-400">
-                Code received!
-              </h3>
-              <p className="text-sm text-zinc-400 mt-1">
-                Payment settled. Use the code below.
-              </p>
+              <div className="w-14 h-14 rounded-full bg-emerald-500/20 flex items-center justify-center mx-auto mb-3">✓</div>
+              <h3 className="text-xl font-semibold text-emerald-400">Code received!</h3>
+              <p className="text-sm text-zinc-400 mt-1">Payment settled. Use the code below.</p>
             </div>
-
             <div className="grid sm:grid-cols-2 gap-4">
               <div className="bg-zinc-950 border border-zinc-700 rounded-xl p-5 text-center">
-                <p className="text-xs text-zinc-500 uppercase tracking-wider mb-1">
-                  Phone number
-                </p>
-                <p className="text-xl font-mono font-semibold text-amber-400">
-                  +{state.number}
-                </p>
-                <button
-                  onClick={() => copy(String(state.number), "number")}
-                  className="mt-2 text-sm text-zinc-400 hover:text-zinc-200 inline-flex items-center gap-1"
-                >
-                  {copied === "number" ? <>✓</> : <>📋</>}
-                  {copied === "number" ? " Copied" : " Copy"}
+                <p className="text-xs text-zinc-500 uppercase tracking-wider mb-1">Phone number</p>
+                <p className="text-xl font-mono font-semibold text-amber-400">+{state.number}</p>
+                <button onClick={() => copy(String(state.number), "number")} className="mt-2 text-sm text-zinc-400 hover:text-zinc-200 inline-flex items-center gap-1">
+                  {copied === "number" ? "✓ Copied" : "📋 Copy"}
                 </button>
               </div>
               <div className="bg-zinc-950 border border-emerald-700/50 rounded-xl p-5 text-center">
-                <p className="text-xs text-zinc-500 uppercase tracking-wider mb-1">
-                  Activation code
-                </p>
-                <p className="text-3xl font-mono font-bold text-emerald-400 tracking-widest">
-                  {state.code}
-                </p>
-                <button
-                  onClick={() => copy(String(state.code), "code")}
-                  className="mt-2 text-sm text-zinc-400 hover:text-zinc-200 inline-flex items-center gap-1"
-                >
-                  {copied === "code" ? <>✓</> : <>📋</>}
-                  {copied === "code" ? " Copied" : " Copy"}
+                <p className="text-xs text-zinc-500 uppercase tracking-wider mb-1">Activation code</p>
+                <p className="text-3xl font-mono font-bold text-emerald-400 tracking-widest">{state.code}</p>
+                <button onClick={() => copy(String(state.code), "code")} className="mt-2 text-sm text-zinc-400 hover:text-zinc-200 inline-flex items-center gap-1">
+                  {copied === "code" ? "✓ Copied" : "📋 Copy"}
                 </button>
               </div>
             </div>
-
             {(state.country || state.service) && (
-              <p className="text-center text-xs text-zinc-500">
-                {state.service}
-                {state.country ? ` · ${state.country}` : ""}
-              </p>
+              <p className="text-center text-xs text-zinc-500">{state.service}{state.country ? ` · ${state.country}` : ""}</p>
             )}
-
             <div className="text-center">
-              <button
-                onClick={reset}
-                className="inline-flex items-center gap-2 bg-zinc-800 hover:bg-zinc-700 text-zinc-100 font-medium px-5 py-2.5 rounded-xl transition"
-              >
-                ↻ New order
-              </button>
+              <button onClick={reset} className="inline-flex items-center gap-2 bg-zinc-800 hover:bg-zinc-700 text-zinc-100 font-medium px-5 py-2.5 rounded-xl transition">↻ New order</button>
             </div>
           </div>
         )}
@@ -512,38 +426,19 @@ export default function Home() {
           <div className="bg-zinc-900/60 border border-zinc-800 rounded-2xl p-8 text-center space-y-4">
             <span className={`text-5xl ${state.step === "cancelled" ? "text-zinc-500" : "text-red-400"}`}>✕</span>
             <p className="text-zinc-300 max-w-md mx-auto">{state.message}</p>
-            <button
-              onClick={reset}
-              className="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-400 text-zinc-950 font-medium px-5 py-2.5 rounded-xl transition"
-            >
-              Try again
-            </button>
+            <button onClick={reset} className="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-400 text-zinc-950 font-medium px-5 py-2.5 rounded-xl transition">Try again</button>
           </div>
         )}
 
         {state.step === "select" && (
           <div className="mt-12 grid sm:grid-cols-3 gap-6 text-center">
             {[
-              {
-                n: "1",
-                title: "Select",
-                desc: "Country & service (or Auto + Any other)",
-              },
-              {
-                n: "2",
-                title: "Pay",
-                desc: "Lightning invoice. Hold invoice — refund if no code",
-              },
-              {
-                n: "3",
-                title: "Receive",
-                desc: "Number + code appear. Use them to verify",
-              },
+              { n: "1", title: "Select", desc: "Country & service (or Auto + Any other)" },
+              { n: "2", title: "Pay", desc: "Lightning invoice. Hold invoice — refund if no code" },
+              { n: "3", title: "Receive", desc: "Number + code appear. Use them to verify" },
             ].map((s) => (
               <div key={s.n} className="space-y-2">
-                <div className="w-8 h-8 rounded-full bg-zinc-800 text-amber-400 font-bold flex items-center justify-center mx-auto text-sm">
-                  {s.n}
-                </div>
+                <div className="w-8 h-8 rounded-full bg-zinc-800 text-amber-400 font-bold flex items-center justify-center mx-auto text-sm">{s.n}</div>
                 <h4 className="font-medium text-zinc-200">{s.title}</h4>
                 <p className="text-sm text-zinc-500">{s.desc}</p>
               </div>
@@ -555,25 +450,10 @@ export default function Home() {
       <footer className="border-t border-zinc-800 py-6 text-center text-sm text-zinc-500">
         <p>
           Powered by{" "}
-          <a
-            href="https://sms4sats.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-amber-400/80 hover:text-amber-400"
-          >
-            sms4sats.com
-          </a>
+          <a href="https://sms4sats.com" target="_blank" rel="noopener noreferrer" className="text-amber-400/80 hover:text-amber-400">sms4sats.com</a>
           {" · "}
-          <a
-            href="https://api.sms4sats.com/skill.md"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-zinc-300"
-          >
-            Agent skill
-          </a>
-          {" · "}
-          Independent integration demo
+          <a href="https://api.sms4sats.com/skill.md" target="_blank" rel="noopener noreferrer" className="hover:text-zinc-300">Agent skill</a>
+          {" · "}Independent integration demo
         </p>
       </footer>
     </div>
